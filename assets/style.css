@@ -2,19 +2,24 @@
    17912 Development Negotiation — Cemetery Owners project site
    Palette: UTS black/white core + medium-orange accent, per-party colour coding
 
-   COLOUR SYSTEM — alternating sections
+   COLOUR SYSTEM — grouped by presentation role, not alternating
    -------------------------------------------------------------
-   Every <section> on a page alternates background:
-     nth-of-type(odd)  = black background, white text  (site default)
-     nth-of-type(even) = white background, black text
+   Pages are laid out in three physical blocks after the title
+   section, in this fixed order, so presenting is a straight scroll:
+     1. .sec-core       (white bg) — every "Presented live" section
+     2. .sec-ref        (black bg) — every "Supporting detail" section
+     3. .sec-logistics  (white bg) — every "Logistics" section
+   The hero/page-head itself is .sec-title (black bg, unchanged look).
    Any "box" inside a section (.card, .callout, .step, .rubric-card,
    table.styled, .tab-btn) is INVERTED relative to its own section:
-   white boxes on black sections, black boxes on white sections.
-   This is done by redefining the shared --bg/--fg/--muted/--border
-   custom properties at the section and box level — components below
-   just reference the variables, so new content automatically gets
-   the correct colours without any extra classes. Don't hardcode
-   colours in new component CSS; use the variables so this keeps working.
+   white boxes on black sections (.sec-title/.sec-ref), black boxes on
+   white sections (.sec-core/.sec-logistics). This is done by
+   redefining the shared --bg/--fg/--muted/--border custom properties
+   at the section and box level — components below just reference the
+   variables, so new content automatically gets the correct colours
+   without any extra classes. Don't hardcode colours in new component
+   CSS; use the variables so this keeps working. Every <section> must
+   carry exactly one of .sec-title/.sec-core/.sec-ref/.sec-logistics.
    ============================================================ */
 
 :root{
@@ -39,8 +44,8 @@
   --warn: #ffb020;
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif;
   --mono: "SF Mono", "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
-  --radius: 14px;
-  --maxw: 1080px;
+  --radius: 18px;
+  --maxw: 1100px;
 }
 
 *{box-sizing:border-box;}
@@ -58,49 +63,51 @@ body{
 a{color:inherit;}
 img{max-width:100%;display:block;}
 
-.wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
 
 /* ---------- Top banner (course strip) ---------- */
 .course-strip{
   background:var(--fg);
   color:var(--bg);
-  font-size:12.5px;
-  letter-spacing:.04em;
+  font-size:11.5px;
+  letter-spacing:.05em;
   text-transform:uppercase;
-  font-weight:700;
+  font-weight:600;
 }
 .course-strip .wrap{
   display:flex; justify-content:space-between; align-items:center;
-  padding-top:8px; padding-bottom:8px; gap:12px; flex-wrap:wrap;
+  padding-top:9px; padding-bottom:9px; gap:12px; flex-wrap:wrap;
 }
 
 /* ---------- Header / Nav (fixed chrome — always dark, not part of the alternation) ---------- */
 header.site{
   position:sticky; top:0; z-index:50;
-  background:rgba(10,10,10,.92);
-  backdrop-filter:blur(10px);
+  background:rgba(10,10,10,.78);
+  backdrop-filter:saturate(180%) blur(18px);
+  -webkit-backdrop-filter:saturate(180%) blur(18px);
   border-bottom:1px solid var(--border);
   color:var(--fg);
 }
 .nav-row{
   display:flex; align-items:center; justify-content:space-between;
-  padding:16px 0; gap:24px;
+  padding:13px 0; gap:24px;
 }
 .brand{
   display:flex; align-items:center; gap:10px;
-  font-weight:800; letter-spacing:-.01em; font-size:17px;
+  font-weight:700; letter-spacing:-.01em; font-size:15.5px;
   text-decoration:none; color:var(--fg);
 }
-.brand small{display:block; font-weight:500; color:var(--muted); font-size:11px; letter-spacing:.02em;}
+.brand small{display:block; font-weight:500; color:var(--muted); font-size:10.5px; letter-spacing:.02em;}
 
 .uts-logo{display:block; flex-shrink:0; border-radius:8px; border:1px solid var(--border);}
-.uts-logo-header{width:56px; height:56px;}
-.uts-logo-footer{width:44px; height:44px;}
+.uts-logo-header{width:48px; height:48px;}
+.uts-logo-footer{width:40px; height:40px;}
 
 nav.main{display:flex; gap:2px; flex-wrap:wrap;}
 nav.main a{
-  text-decoration:none; color:var(--muted); font-size:13.5px; font-weight:600;
-  padding:8px 12px; border-radius:8px; transition:.15s;
+  text-decoration:none; color:var(--muted); font-size:12.5px; font-weight:500;
+  letter-spacing:.01em;
+  padding:8px 14px; border-radius:99px; transition:.15s;
   white-space:nowrap;
 }
 nav.main a:hover{color:var(--fg); background:var(--bg-alt);}
@@ -121,83 +128,102 @@ nav.main a.active{color:var(--fg); background:var(--bg-card); border:1px solid v
   }
 }
 
-/* ---------- Section alternation (black / white bands) ---------- */
-section:nth-of-type(odd){
+/* ---------- Section grouping (black / white blocks by presentation role) ---------- */
+section.sec-title, section.sec-ref{
   background:var(--bg); color:var(--fg);
 }
-section:nth-of-type(even){
+section.sec-core, section.sec-logistics{
   --bg:#ffffff; --fg:#0a0a0a; --muted:#5a5a5a; --muted-2:#76766f;
   --border:#e3e3e0; --border-soft:#ececea; --bg-alt:#f4f4f2;
   background:var(--bg); color:var(--fg);
 }
 
 /* "Boxes" inside a section are inverted relative to that section */
-section:nth-of-type(odd) :is(.card,.callout,.step,.rubric-card,table.styled,.tab-btn){
+section.sec-title :is(.card,.callout,.step,.rubric-card,table.styled,.tab-btn),
+section.sec-ref :is(.card,.callout,.step,.rubric-card,table.styled,.tab-btn){
   --bg:#ffffff; --fg:#0a0a0a; --muted:#5a5a5a; --muted-2:#76766f;
   --border:#e3e3e0; --border-soft:#ececea; --bg-alt:#f4f4f2;
 }
-section:nth-of-type(even) :is(.card,.callout,.step,.rubric-card,table.styled,.tab-btn){
+section.sec-core :is(.card,.callout,.step,.rubric-card,table.styled,.tab-btn),
+section.sec-logistics :is(.card,.callout,.step,.rubric-card,table.styled,.tab-btn){
   --bg:#0a0a0a; --fg:#f2f2f0; --muted:#a6a6a2; --muted-2:#7a7a76;
   --border:#272727; --border-soft:#1d1d1d; --bg-alt:#131313;
 }
 
+/* Small label marking the start of each block — reinforces the colour change
+   with a word, since blocks are no longer just alternating for variety. */
+.group-divider{
+  display:flex; align-items:center; gap:14px;
+  max-width:var(--maxw); margin:0 auto; padding:26px 28px 0;
+  font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--muted-2);
+}
+.group-divider::before, .group-divider::after{content:""; height:1px; background:var(--border); flex:1;}
+section.sec-ref .group-divider{color:var(--muted);}
+
 /* ---------- Hero ---------- */
 .hero{
   position:relative; overflow:hidden;
-  padding:96px 0 60px; border-bottom:1px solid var(--border);
+  padding:132px 0 76px; border-bottom:1px solid var(--border);
 }
 .hero::before{
   content:""; position:absolute; z-index:0; pointer-events:none;
-  top:-260px; left:50%; width:980px; height:560px; transform:translateX(-50%);
-  background:radial-gradient(closest-side, rgba(204,102,0,.24), transparent 72%);
+  top:-320px; left:50%; width:1180px; height:680px; transform:translateX(-50%);
+  background:radial-gradient(closest-side, rgba(204,102,0,.22), transparent 72%);
 }
 .hero > .wrap{position:relative; z-index:1;}
 
+/* Centred "title card" hero — used on index.html, the opening beat of the presentation */
+.hero.center{text-align:center;}
+.hero.center > .wrap{display:flex; flex-direction:column; align-items:center;}
+.hero.center .lede{margin-left:auto; margin-right:auto;}
+.hero.center .hero-media{width:100%;}
+
 .eyebrow{
   display:inline-flex; align-items:center; gap:8px;
-  font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+  font-family:var(--mono); font-size:11.5px; letter-spacing:.09em; text-transform:uppercase;
   color:var(--accent); border:1px solid var(--accent-dim); background:rgba(204,102,0,.08);
-  padding:7px 14px; border-radius:99px; margin-bottom:24px;
+  padding:7px 14px; border-radius:99px; margin-bottom:28px;
 }
 h1{
-  font-size:clamp(32px,5.4vw,58px); font-weight:800; line-height:1.04;
-  letter-spacing:-.03em; margin:0 0 20px;
+  font-size:clamp(34px,6.2vw,74px); font-weight:700; line-height:1.02;
+  letter-spacing:-.04em; margin:0 0 22px;
 }
-.lede{font-size:19px; line-height:1.6; color:var(--muted); max-width:62ch; margin:0 0 32px;}
+.lede{font-size:21px; line-height:1.55; font-weight:400; color:var(--muted); max-width:56ch; margin:0 0 36px;}
 .hero-actions{display:flex; gap:12px; flex-wrap:wrap;}
 
 .hero-media{
-  margin:36px 0 0; border:1px solid var(--border); border-radius:var(--radius);
+  margin:44px 0 0; border:1px solid var(--border); border-radius:var(--radius);
   overflow:hidden; background:var(--bg-alt);
 }
 .hero-media img{width:100%; display:block;}
 .hero-media figcaption{
-  padding:14px 20px; font-size:13px; color:var(--muted); border-top:1px solid var(--border);
+  padding:16px 22px; font-size:13px; color:var(--muted); border-top:1px solid var(--border);
 }
 
 .btn{
   display:inline-flex; align-items:center; gap:8px;
-  text-decoration:none; font-weight:700; font-size:14.5px;
-  padding:14px 26px; border-radius:999px; border:1px solid transparent;
-  transition:transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease, color .18s ease;
+  text-decoration:none; font-weight:600; font-size:15px;
+  padding:14px 28px; border-radius:999px; border:1px solid transparent;
+  transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease, background .18s ease, border-color .18s ease, color .18s ease;
 }
 .btn-primary{background:var(--accent); color:#fff;}
-.btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 28px rgba(204,102,0,.35);}
+.btn-primary:hover{transform:scale(1.035); box-shadow:0 10px 28px rgba(204,102,0,.35);}
 .btn-outline{border-color:var(--border); color:var(--fg); background:rgba(255,255,255,.02);}
-.btn-outline:hover{border-color:var(--fg); transform:translateY(-2px);}
+.btn-outline:hover{border-color:var(--fg); transform:scale(1.035);}
 
 /* ---------- Section scaffolding ---------- */
-section{padding:80px 0;}
-section.tight{padding:44px 0;}
-.section-head{margin-bottom:36px;}
+section{padding:116px 0;}
+section.tight{padding:60px 0;}
+.section-head{margin-bottom:40px;}
 .kicker{
-  font-family:var(--mono); font-size:12px; letter-spacing:.12em; text-transform:uppercase;
-  color:var(--muted-2); margin-bottom:10px; display:flex; align-items:center; gap:8px;
+  font-family:var(--mono); font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--muted-2); margin-bottom:12px; display:flex; align-items:center; gap:8px;
 }
 .kicker::before{content:""; width:14px; height:1px; background:var(--accent-dim);}
-h2{font-size:clamp(24px,3.6vw,36px); font-weight:800; letter-spacing:-.02em; margin:0 0 12px;}
-h3{font-size:19px; font-weight:700; margin:0 0 8px;}
-.section-sub{color:var(--muted); font-size:16px; max-width:70ch;}
+h2{font-size:clamp(26px,4vw,42px); font-weight:700; letter-spacing:-.03em; margin:0 0 14px;}
+h3{font-size:19px; font-weight:600; margin:0 0 8px; letter-spacing:-.01em;}
+.section-sub{color:var(--muted); font-size:17px; line-height:1.55; max-width:68ch;}
 
 .divider{border:none; border-top:1px solid var(--border); margin:0;}
 
@@ -206,13 +232,13 @@ h3{font-size:19px; font-weight:700; margin:0 0 8px;}
   display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
   border-top:1px solid var(--border); border-bottom:1px solid var(--border);
 }
-.stat{padding:30px 26px; border-left:1px solid var(--border);}
+.stat{padding:34px 28px; border-left:1px solid var(--border);}
 .stat:first-child{border-left:none;}
-.stat .num{font-family:var(--mono); font-size:34px; font-weight:800; letter-spacing:-.02em; color:var(--fg);}
-.stat .label{color:var(--muted); font-size:12.5px; margin-top:8px; letter-spacing:.01em;}
+.stat .num{font-family:var(--mono); font-size:36px; font-weight:700; letter-spacing:-.02em; color:var(--fg);}
+.stat .label{color:var(--muted); font-size:12.5px; margin-top:9px; letter-spacing:.01em;}
 
 /* ---------- Cards / grid ---------- */
-.grid{display:grid; gap:16px;}
+.grid{display:grid; gap:20px;}
 .grid.cols-2{grid-template-columns:repeat(2,1fr);}
 .grid.cols-3{grid-template-columns:repeat(3,1fr);}
 .grid.cols-4{grid-template-columns:repeat(4,1fr);}
@@ -223,7 +249,7 @@ h3{font-size:19px; font-weight:700; margin:0 0 8px;}
 .card{
   background:var(--bg); color:var(--fg);
   border:1px solid var(--border); border-radius:var(--radius);
-  padding:26px;
+  padding:30px;
   transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
 }
 .card h3{margin-top:0;}
@@ -268,6 +294,56 @@ h3{font-size:19px; font-weight:700; margin:0 0 8px;}
 .badge.progress::before{background:var(--warn);}
 .badge.upcoming{background:rgba(166,166,162,.16); color:var(--muted);}
 .badge.upcoming::before{background:var(--muted-2);}
+
+/* ---------- Presentation flow markers ----------
+   Three labels used consistently across every page to tell a reader (and us,
+   rehearsing) apart what gets narrated aloud in the 15-minute Week 5 slot
+   from what's background/reference material and what's pure admin.
+   .flow-tag.core       = a beat we actually speak to (time estimate inline).
+   .flow-tag.ref        = supporting detail: available if asked, not read verbatim.
+   .flow-tag.logistics  = admin/organisational only — who's in the room, who
+                          does what, sign-off records. Never spoken content;
+                          doesn't count against the 15-minute budget at all. */
+.flow-legend{
+  display:flex; align-items:center; justify-content:center; gap:22px;
+  flex-wrap:wrap; padding:12px 0; font-size:11.5px; color:var(--muted);
+  border-bottom:1px solid var(--border); background:var(--bg-alt);
+}
+.flow-legend .key{display:inline-flex; align-items:center; gap:8px;}
+.flow-legend .dot{width:7px; height:7px; flex-shrink:0;}
+.flow-legend .dot.core{background:var(--accent); border-radius:50%;}
+.flow-legend .dot.ref{background:var(--muted-2); border-radius:50%;}
+.flow-legend .dot.logistics{background:none; border:1.5px solid var(--muted-2); border-radius:2px;}
+
+.flow-tag{
+  display:inline-flex; align-items:center; gap:7px; font-family:var(--mono);
+  font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+  padding:6px 13px; border-radius:99px; white-space:nowrap; flex-shrink:0;
+}
+.flow-tag::before{content:""; width:6px; height:6px; flex-shrink:0;}
+.flow-tag.core{color:var(--accent); border:1px solid var(--accent-dim); background:rgba(204,102,0,.1);}
+.flow-tag.core::before{background:var(--accent); border-radius:50%;}
+.flow-tag.ref{color:var(--muted); border:1px solid var(--border); background:transparent;}
+.flow-tag.ref::before{background:var(--muted-2); border-radius:50%;}
+.flow-tag.logistics{color:var(--muted-2); border:1px dashed var(--border); background:transparent;}
+.flow-tag.logistics::before{background:none; border:1.5px solid var(--muted-2); border-radius:2px;}
+
+/* Time-budget table (outcome.html "Presenting this" logistics section) */
+table.styled td.mono.time{white-space:nowrap;}
+
+/* Section-head rows that pair a kicker/heading block with a flow-tag */
+.section-head.spread{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px;}
+.flow-row{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:12px;}
+.flow-row .kicker{margin-bottom:0;}
+
+/* Draft/status notes — process state (what's filled in vs still pending),
+   distinct from the flow-tag system above: never spoken content, just where
+   the page is up to right now. */
+.status-note{
+  display:inline-flex; align-items:center; gap:8px; font-family:var(--mono);
+  font-size:11px; letter-spacing:.04em; color:var(--muted-2);
+}
+.status-note::before{content:"◐"; color:var(--warn);}
 
 /* ---------- Party chips (brand colours — constant regardless of section) ---------- */
 .party{
@@ -400,6 +476,17 @@ footer.site a{text-decoration:none; color:var(--muted);}
 footer.site a:hover{color:var(--fg);}
 .footer-brand{display:flex; align-items:center; gap:10px;}
 
+/* ---------- References (APA 7) ---------- */
+.ref-list{list-style:none; margin:0 0 14px; padding:0;}
+.ref-list li{
+  padding-left:2em; text-indent:-2em; margin-bottom:12px;
+  color:var(--muted); font-size:14px; line-height:1.55;
+}
+.ref-list li:last-child{margin-bottom:0;}
+.ref-list a{color:var(--accent); text-decoration:none; word-break:break-word;}
+.ref-list a:hover{text-decoration:underline;}
+.ref-note{font-size:12.5px; color:var(--muted-2); font-family:var(--mono);}
+
 /* ---------- utils ---------- */
 .mt-0{margin-top:0;}
 .mb-0{margin-bottom:0;}
@@ -411,14 +498,18 @@ footer.site a:hover{color:var(--fg);}
 
 .page-head{
   position:relative; overflow:hidden;
-  padding:68px 0 20px;
+  padding:100px 0 32px;
 }
 .page-head::before{
   content:""; position:absolute; z-index:0; pointer-events:none;
-  top:-220px; left:-80px; width:680px; height:440px;
-  background:radial-gradient(closest-side, rgba(204,102,0,.18), transparent 72%);
+  top:-260px; left:50%; width:900px; height:520px; transform:translateX(-50%);
+  background:radial-gradient(closest-side, rgba(204,102,0,.20), transparent 72%);
 }
-.page-head .wrap{position:relative; z-index:1;}
+.page-head .wrap{
+  position:relative; z-index:1;
+  text-align:center; display:flex; flex-direction:column; align-items:center;
+}
+.page-head .lede{margin-left:auto; margin-right:auto;}
 
 /* ---------- Scroll reveal (progressive enhancement, class added via JS only) ---------- */
 .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
@@ -438,7 +529,7 @@ footer.site a:hover{color:var(--fg);}
 .kicker::before{width:22px; height:2px; background:var(--accent); border-radius:2px;}
 
 /* White bands framed as deliberate inset panels, not a hard flip */
-section:nth-of-type(even){box-shadow:inset 0 1px 0 var(--border), inset 0 -1px 0 var(--border);}
+section.sec-core, section.sec-logistics{box-shadow:inset 0 1px 0 var(--border), inset 0 -1px 0 var(--border);}
 
 /* Livelier stat blocks */
 .stats{border-top:2px solid var(--accent);}
