@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // ---------------------------------------------------------------
-  // Slide decks — the "Presentation copy option" block on every page.
+  // Slide decks — the "Presentation draft" block on every page.
   // Progressive enhancement: the deck only becomes a carousel once this
   // runs and adds .ready. Without JS the slides just stack and read.
   // Nav: arrow buttons, left/right keyboard keys, touch swipe, dots.
@@ -70,6 +70,14 @@ document.addEventListener('DOMContentLoaded', function () {
         var off = n !== index;
         s.setAttribute('aria-hidden', off ? 'true' : 'false');
         if (off) { s.setAttribute('inert', ''); } else { s.removeAttribute('inert'); }
+        // .is-active drives the entrance stagger and the self-drawing bars
+        // and donut segments in style.css. Removing then re-adding it is
+        // what replays those animations when you come back to a slide.
+        s.classList.remove('is-active');
+      });
+      // Next frame, so the class removal above actually restarts the animation.
+      (window.requestAnimationFrame || setTimeout)(function () {
+        slides[index].classList.add('is-active');
       });
       dots.forEach(function (d, n) {
         d.setAttribute('aria-selected', n === index ? 'true' : 'false');

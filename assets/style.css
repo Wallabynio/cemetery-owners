@@ -600,7 +600,7 @@ a:focus-visible, .btn:focus-visible, .tab-btn:focus-visible,
 }
 
 /* ============================================================
-   SLIDE DECK — the "Presentation copy option" block, every page
+   SLIDE DECK — the "Presentation draft" block, every page
    ------------------------------------------------------------
    Each page's core block is now ONE <section class="sec-core deck-section">
    containing a single .deck. The old one-section-per-beat layout is gone;
@@ -652,7 +652,7 @@ a:focus-visible, .btn:focus-visible, .tab-btn:focus-visible,
 .slide{
   flex:0 0 100%; height:100%; min-width:0;
   display:flex; flex-direction:column;
-  padding:5.4cqw 6.4cqw;
+  padding:5.4cqw 7.6cqw;
   overflow:auto; -webkit-overflow-scrolling:touch;
   font-size:clamp(12px, 1.62cqw, 20px);
   line-height:1.5;
@@ -801,6 +801,226 @@ table.slide-table tr.total td{background:var(--s-soft); color:var(--s-fg); font-
   font-size:.7em; letter-spacing:.04em; color:var(--s-faint);
 }
 .slide-status::before{content:"◐"; color:var(--warn);}
+
+/* ============================================================
+   SLIDE GRAPHICS LAYER — added 28 July
+   ------------------------------------------------------------
+   Editorial + data-led layer sitting on top of the base slide
+   components above. Same rules apply: everything is em/cqw-based,
+   never px, so a slide rescales from one root font-size.
+
+   Three things live here:
+     1. .slide.invert   — the dark-canvas slide variant. It only
+        re-points the --s-* and --diagram-* custom properties, so
+        every existing component (cards, tiers, tables) follows
+        automatically. Don't hard-code colours on invert slides.
+     2. Graphic components — .slide-bignum, .slide-panel,
+        .slide-iconcards, .slide-range, .slide-donut, .slide-flow.
+     3. Entrance motion — a staggered rise on the active slide,
+        plus self-drawing bars and donut segments. All of it is
+        inside prefers-reduced-motion:no-preference, and all of it
+        is scoped to .deck.ready so a no-JS page renders static.
+   ============================================================ */
+
+/* ---- Dark canvas variant ---- */
+.slide.invert{
+  --s-fg:#f6f6f3; --s-muted:#b4b4ad; --s-faint:#84847d;
+  --s-line:#2e2e2e; --s-soft:#171717;
+  --diagram:#8fb2e0; --diagram-mid:#6d8fbd; --diagram-line:#42546d;
+  --diagram-soft:rgba(126,158,206,.13);
+  --s-accent:#ff9a3c;
+  color:var(--s-fg);
+  background:
+    radial-gradient(88% 120% at 86% -12%, rgba(204,102,0,.22) 0%, rgba(204,102,0,0) 56%),
+    radial-gradient(78% 104% at -6% 104%, rgba(74,111,165,.22) 0%, rgba(74,111,165,0) 60%),
+    linear-gradient(158deg, #191919 0%, #0d0d0d 58%, #090909 100%);
+}
+.slide{--s-accent:var(--accent);}
+.slide-title .hl{color:var(--s-accent);}
+.slide-kicker::before{background:var(--s-accent);}
+.slide a{color:var(--s-accent);}
+.slide-stat .n{color:var(--s-accent);}
+.slide.invert .slide-time{
+  color:#ffb15c; border-color:rgba(255,177,92,.34); background:rgba(255,177,92,.10);
+}
+.slide.invert .slide-card{background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.11);}
+.slide.invert .slide-card.diagram{background:rgba(126,158,206,.11);}
+.slide.invert .slide-panel{background:linear-gradient(180deg, rgba(255,255,255,.055) 0%, rgba(255,255,255,0) 130%);}
+.slide.invert table.slide-table tr.total td{background:rgba(255,255,255,.07);}
+.slide.invert .slide-iconcard{background:linear-gradient(180deg, rgba(255,255,255,.05) 0%, rgba(255,255,255,0) 150%);}
+
+/* ---- Oversized display numeral ---- */
+.slide-bignum{
+  font-family:var(--mono); font-weight:700; line-height:.84;
+  letter-spacing:-.055em; font-size:6.4em;
+  background:linear-gradient(134deg, #ff9f45 0%, #cc6600 52%, #7d3d00 100%);
+  -webkit-background-clip:text; background-clip:text;
+  color:transparent; -webkit-text-fill-color:transparent;
+}
+.slide.invert .slide-bignum{
+  background:linear-gradient(134deg, #ffd7a8 0%, #ff9a3c 46%, #cc6600 100%);
+  -webkit-background-clip:text; background-clip:text;
+}
+.slide-bignum.council{
+  background:linear-gradient(134deg, #6f9bff 0%, #2b6bff 52%, #143a8f 100%);
+  -webkit-background-clip:text; background-clip:text;
+}
+.slide-bignum.park{
+  background:linear-gradient(134deg, #4fc084 0%, #1d8a4c 52%, #0d4a29 100%);
+  -webkit-background-clip:text; background-clip:text;
+}
+.slide-bignum.slate{
+  background:linear-gradient(134deg, #8fb2e0 0%, #4a6fa5 52%, #26405f 100%);
+  -webkit-background-clip:text; background-clip:text;
+}
+.slide-bignum .unit{font-size:.42em; letter-spacing:-.02em;}
+.slide-bigcap{
+  font-family:var(--mono); font-size:.74em; font-weight:700;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--s-faint);
+}
+
+/* ---- Tinted panel with a party/accent spine ---- */
+.slide-panels{display:flex; flex-direction:column; gap:.7em;}
+.slide-panel{
+  position:relative; min-width:0;
+  border:1px solid var(--s-line); border-radius:1.05em;
+  padding:1em 1.25em 1em 1.5em;
+  background:linear-gradient(180deg, var(--s-soft) 0%, transparent 135%);
+}
+.slide-panel::before{
+  content:""; position:absolute; left:.75em; top:1.05em; bottom:1.05em;
+  width:3px; border-radius:3px; background:var(--pc, var(--diagram));
+}
+.slide-panel.us{--pc:var(--accent);}
+.slide-panel.council{--pc:var(--council);}
+.slide-panel.park{--pc:var(--park);}
+.slide.invert .slide-panel.us{--pc:#ff9a3c;}
+.slide-panel h3{
+  font-family:var(--mono); font-size:.72em; font-weight:700;
+  letter-spacing:.14em; text-transform:uppercase;
+  color:var(--pc, var(--diagram)); margin:0 0 .45em;
+}
+.slide-panel p{font-size:.95em; line-height:1.45; color:var(--s-muted);}
+.slide-panel p strong{color:var(--s-fg);}
+
+/* ---- Icon cards ---- */
+.slide-iconcards{display:grid; grid-template-columns:repeat(3,1fr); gap:.9em;}
+.slide-iconcards.two{grid-template-columns:repeat(2,1fr);}
+.slide-iconcard{
+  display:flex; flex-direction:column; gap:.6em; min-width:0;
+  border:1px solid var(--s-line); border-radius:1.05em; padding:1.1em 1.15em;
+  background:linear-gradient(180deg, var(--s-soft) 0%, transparent 155%);
+}
+.slide-iconcard .ic{
+  width:2.5em; height:2.5em; border-radius:.7em; display:grid; place-items:center;
+  background:var(--diagram-soft); color:var(--diagram); flex-shrink:0;
+}
+.slide-iconcard .ic svg{width:1.4em; height:1.4em; display:block;}
+.slide-iconcard h3{font-size:.98em; font-weight:700; margin:0; color:var(--s-fg); letter-spacing:-.01em; line-height:1.25;}
+.slide-iconcard p{font-size:.85em; line-height:1.4; color:var(--s-muted);}
+
+/* ---- Horizontal range chart (our aspire / content / live-with ladder) ---- */
+.slide-range{display:flex; flex-direction:column; gap:.55em;}
+.slide-rangerow{display:grid; grid-template-columns:8.6em 1fr 4.6em; gap:.85em; align-items:center;}
+.slide-rangerow .r-label{font-size:.85em; font-weight:700; color:var(--s-fg); line-height:1.2;}
+.slide-rangerow .r-label small{display:block; font-weight:400; font-size:.85em; color:var(--s-faint); margin-top:.15em;}
+.slide-rangerow .r-track{
+  position:relative; height:1.7em; border-radius:.5em; overflow:hidden;
+  background:var(--s-soft); border:1px solid var(--s-line);
+}
+.slide-rangerow .r-fill{
+  position:absolute; top:0; bottom:0; left:0; width:var(--w,50%);
+  transform-origin:left center;
+  background:linear-gradient(90deg, var(--c1,#4a6fa5), var(--c2,#7d99c2));
+}
+.slide-rangerow .r-val{font-family:var(--mono); font-size:.82em; font-weight:700; color:var(--s-fg); text-align:right;}
+.slide-rangerow.aspire .r-fill{--c1:#1d8a4c; --c2:#54bd83;}
+.slide-rangerow.content .r-fill{--c1:#4a6fa5; --c2:#8aa6cb;}
+.slide-rangerow.limit  .r-fill{--c1:#cc6600; --c2:#ff9f45;}
+.slide-rangerow.walk .r-track{border-style:dashed;}
+.slide-rangerow.walk .r-fill{--c1:#9a9a92; --c2:#c9c9c2; opacity:.45;}
+.slide-rangerow.walk .r-label, .slide-rangerow.walk .r-val{color:var(--s-faint);}
+.slide-scale{
+  display:flex; justify-content:space-between;
+  font-family:var(--mono); font-size:.68em; color:var(--s-faint);
+  margin-left:9.45em; margin-right:5.45em;
+}
+
+/* ---- Donut + legend ---- */
+.slide-donut{display:grid; grid-template-columns:auto 1fr; gap:1.8em; align-items:center;}
+.slide-donut > svg{width:11.5em; height:11.5em; flex-shrink:0; overflow:visible;}
+.slide-donut .d-hole{font-family:var(--mono); font-weight:700; fill:var(--s-fg);}
+.slide-donut .d-sub{font-family:var(--mono); fill:var(--s-faint);}
+.slide-legend{display:flex; flex-direction:column; gap:.8em; min-width:0;}
+.slide-legend .lg-row{display:grid; grid-template-columns:auto 1fr auto; gap:.8em; align-items:baseline;}
+.slide-legend i{width:.72em; height:.72em; border-radius:.2em; font-style:normal; transform:translateY(.08em);}
+.slide-legend .lg-t{font-size:.92em; font-weight:700; color:var(--s-fg); line-height:1.3;}
+.slide-legend .lg-t small{display:block; font-size:.82em; font-weight:400; color:var(--s-faint); margin-top:.2em; line-height:1.35;}
+.slide-legend .lg-v{font-family:var(--mono); font-size:.95em; font-weight:700; color:var(--s-fg); white-space:nowrap;}
+
+/* ---- Horizontal flow: three steps with connectors ---- */
+.slide-flow{display:grid; grid-template-columns:repeat(3,1fr); gap:.8em; align-items:stretch;}
+.slide-flowstep{
+  position:relative; min-width:0; border-radius:1.05em; padding:1em 1.1em;
+  border:1px solid var(--s-line);
+  background:linear-gradient(180deg, var(--s-soft) 0%, transparent 150%);
+}
+.slide-flowstep .fs-n{
+  font-family:var(--mono); font-size:.7em; font-weight:700; letter-spacing:.12em;
+  color:var(--s-accent); text-transform:uppercase;
+}
+.slide-flowstep h3{font-size:.98em; font-weight:700; margin:.35em 0 .3em; color:var(--s-fg); line-height:1.25;}
+.slide-flowstep p{font-size:.83em; line-height:1.4; color:var(--s-muted);}
+.slide-flowstep:not(:last-child)::after{
+  content:""; position:absolute; right:-.62em; top:50%; z-index:2;
+  width:.44em; height:.44em; margin-top:-.22em;
+  border-top:2px solid var(--diagram-mid); border-right:2px solid var(--diagram-mid);
+  transform:rotate(45deg);
+}
+
+/* ---- Entrance motion ---- */
+@media (prefers-reduced-motion:no-preference){
+  .deck.ready .slide > .slide-head,
+  .deck.ready .slide > .slide-body > *{opacity:0;}
+  .deck.ready .slide.is-active > .slide-head,
+  .deck.ready .slide.is-active > .slide-body > *{
+    animation:slideRise .6s cubic-bezier(.22,.75,.28,1) both;
+  }
+  .deck.ready .slide.is-active > .slide-head{animation-delay:0s;}
+  .deck.ready .slide.is-active > .slide-body > *:nth-child(1){animation-delay:.08s;}
+  .deck.ready .slide.is-active > .slide-body > *:nth-child(2){animation-delay:.16s;}
+  .deck.ready .slide.is-active > .slide-body > *:nth-child(3){animation-delay:.24s;}
+  .deck.ready .slide.is-active > .slide-body > *:nth-child(4){animation-delay:.32s;}
+  .deck.ready .slide.is-active > .slide-body > *:nth-child(n+5){animation-delay:.4s;}
+
+  .deck.ready .slide.is-active .r-fill{
+    animation:growX .9s cubic-bezier(.2,.76,.26,1) both; animation-delay:.42s;
+  }
+  .deck.ready .slide.is-active .donut-seg{
+    animation:drawRing 1.05s cubic-bezier(.28,.72,.28,1) both; animation-delay:.34s;
+  }
+  .deck.ready .slide.is-active .slide-bar span{
+    animation:growX .9s cubic-bezier(.2,.76,.26,1) both; animation-delay:.4s;
+    transform-origin:left center;
+  }
+}
+@keyframes slideRise{from{opacity:0; transform:translateY(1.15em);} to{opacity:1; transform:none;}}
+@keyframes growX{from{transform:scaleX(0);} to{transform:scaleX(1);}}
+@keyframes drawRing{from{stroke-dashoffset:var(--len,999);} to{stroke-dashoffset:0;}}
+
+/* ---- Responsive: collapse the new grids with everything else ---- */
+@media (max-width:820px){
+  .slide-donut{grid-template-columns:1fr; gap:1.2em; justify-items:center;}
+  .slide-donut > svg{width:9em; height:9em;}
+}
+@media (max-width:640px){
+  .slide-iconcards, .slide-iconcards.two, .slide-flow{grid-template-columns:1fr;}
+  .slide-flowstep:not(:last-child)::after{display:none;}
+  .slide-rangerow{grid-template-columns:1fr auto; gap:.3em .7em;}
+  .slide-rangerow .r-label{grid-column:1 / -1;}
+  .slide-scale{margin-left:0; margin-right:4.6em;}
+  .slide-bignum{font-size:4.6em;}
+}
 
 /* ---- Arrows ---- */
 .deck-nav{

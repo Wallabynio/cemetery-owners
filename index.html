@@ -33,43 +33,45 @@
   </div>
 </header>
 
-<div class="flow-legend">
-  <span class="key"><span class="dot core"></span> Presentation copy option in Week 5</span>
-  <span class="key"><span class="dot ref"></span> Supporting detail — reference only</span>
-  <span class="key"><span class="dot logistics"></span> Logistics — not part of the 15 minutes</span>
-</div>
-
 <section class="hero center sec-title">
   <div class="wrap">
     <h1>Scenario 1 — <span style="color:var(--accent);">Lane Cove National Park</span> access road, North Ryde.</h1>
-    <p class="lede">The case exactly as we received it, from our perspective as the Cemetery Owners. We only have 15 minutes in Week 5, so this page — like every page — is laid out in the order we'll actually present it: what we say first, below it what's there only if the room asks.</p>
+    <p class="lede">The case as all three groups received it, read from our side of the table as the Cemetery Owners.</p>
   </div>
 </section>
 
-<div class="group-divider">Presentation copy option — Week 5</div>
+<div class="group-divider">Presentation draft — Week 5</div>
 
 <section class="sec-core deck-section">
   <div class="wrap">
     <div class="deck-head">
-      <span class="kicker">The case — presentation deck</span>
-      <span class="flow-tag core">Presentation copy option · ~1.6 min</span>
+      <span class="kicker">The case</span>
+      <span class="flow-tag core">Presentation draft · ~1.5 min</span>
     </div>
 
     <div class="deck" data-deck aria-roledescription="slide deck" aria-label="The case — presentation deck">
       <div class="deck-stage">
         <div class="deck-track">
-
-          <article class="slide">
+          <article class="slide invert">
             <div class="slide-head">
               <span class="slide-kicker">Scenario 1</span>
               <span class="slide-time">~10s</span>
             </div>
             <div class="slide-body">
-              <h2 class="slide-title">One road, <span class="hl">three parties</span>, and a $2 million bill nobody wants to carry.</h2>
-              <p class="slide-lede">Lane Cove National Park access road, North Ryde. This is the case exactly as all three groups received it — read here from our side of the table.</p>
-              <div class="slide-stats">
-                <div class="slide-stat"><div class="n">$2.0M</div><div class="label">Total project cost at stake</div></div>
-                <div class="slide-stat"><div class="n">3</div><div class="label">Parties negotiating</div></div>
+              <h2 class="slide-title">One road, <span class="hl">three parties</span>, and a bill nobody wants to carry.</h2>
+              <div class="slide-split even">
+                <div>
+                  <p class="slide-lede">Lane Cove National Park access road, North Ryde.</p>
+                  <div class="legend" style="margin-top:1.1em;">
+                    <span class="party us">Cemetery Owners (us)</span>
+                    <span class="party council">Council</span>
+                    <span class="party park">National Park</span>
+                  </div>
+                </div>
+                <div>
+                  <div class="slide-bignum">$2.0<span class="unit">M</span></div>
+                  <p class="slide-bigcap" style="margin-top:.9em;">total cost at stake</p>
+                </div>
               </div>
             </div>
           </article>
@@ -83,28 +85,35 @@
               <h2 class="slide-title">Three parties, one road</h2>
               <div class="slide-split even">
                 <div>
-                  <p class="slide-lede">The road serves a rail car park at the top, our Cemetery entrance halfway down, and the Park entrance at the bottom. All three of us have to agree how the $2M fix gets split.</p>
-                  <div class="legend" style="margin-top:1.2em;">
-                    <span class="party us">Cemetery Owners (us)</span>
-                    <span class="party council">Council</span>
-                    <span class="party park">National Park</span>
-                  </div>
+                  <p class="slide-lede">A rail car park at the top, our Cemetery entrance halfway down, the Park entrance at the bottom. All three of us have to agree how the $2M fix gets split.</p>
                 </div>
                 <figure class="slide-figure">
-                  <svg viewBox="0 0 360 212" role="img" aria-label="Schematic of the road: a rail commuter car park at the top of the hill, the Cemetery entrance halfway down, and Lane Cove National Park at the bottom. The road narrows past the Cemetery.">
-          <path d="M30 34 C 108 34, 148 64, 176 106" fill="none" stroke="var(--diagram-line)" stroke-width="20" stroke-linecap="round"/>
-          <path d="M30 34 C 108 34, 148 64, 176 106" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="9 11" stroke-linecap="round"/>
-          <path d="M176 106 C 204 148, 244 174, 322 176" fill="none" stroke="var(--diagram-line)" stroke-width="9" stroke-linecap="round"/>
-          <circle cx="30" cy="34" r="8" fill="var(--council)" stroke="#fff" stroke-width="3"/>
-          <circle cx="176" cy="106" r="8" fill="var(--accent)" stroke="#fff" stroke-width="3"/>
-          <circle cx="322" cy="176" r="8" fill="var(--park)" stroke="#fff" stroke-width="3"/>
-          <text x="48" y="30" font-size="11.5" font-weight="700" fill="var(--s-fg)">Rail commuter car park</text>
-          <text x="48" y="44" font-size="10.5" fill="var(--s-faint)">top of the hill</text>
-          <text x="192" y="102" font-size="11.5" font-weight="700" fill="var(--s-fg)">Cemetery entrance</text>
-          <text x="192" y="116" font-size="10.5" fill="var(--s-faint)">halfway down — us</text>
-          <text x="308" y="198" font-size="11.5" font-weight="700" fill="var(--s-fg)" text-anchor="end">Lane Cove National Park</text>
-          <text x="166" y="150" font-size="10.5" font-weight="700" fill="var(--diagram)" text-anchor="end">narrow · no footpath</text>
-        </svg>
+                  <svg viewBox="0 0 380 236" role="img" aria-label="Schematic of the road running downhill: a rail commuter car park at the top, the Cemetery entrance halfway down, and Lane Cove National Park at the bottom. The road is wide and sealed to the Cemetery, then narrows.">
+                    <defs>
+                      <linearGradient id="hill" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stop-color="var(--diagram-soft)"/>
+                        <stop offset="1" stop-color="var(--diagram-soft)" stop-opacity="0"/>
+                      </linearGradient>
+                      <linearGradient id="roadgrad" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0" stop-color="var(--diagram-line)"/>
+                        <stop offset="1" stop-color="var(--diagram-mid)"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M16 62 C 110 62, 150 96, 186 132 C 222 168, 262 194, 364 198 L 364 236 L 16 236 Z" fill="url(#hill)"/>
+                    <path d="M16 62 C 110 62, 150 96, 186 132" fill="none" stroke="url(#roadgrad)" stroke-width="21" stroke-linecap="round"/>
+                    <path d="M16 62 C 110 62, 150 96, 186 132" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="9 12" stroke-linecap="round"/>
+                    <path d="M186 132 C 222 168, 262 194, 364 198" fill="none" stroke="var(--diagram-mid)" stroke-width="8" stroke-linecap="round" stroke-dasharray="3 5"/>
+                    <circle cx="16" cy="62" r="10" fill="var(--council)" stroke="#fff" stroke-width="3.5"/>
+                    <circle cx="186" cy="132" r="10" fill="var(--accent)" stroke="#fff" stroke-width="3.5"/>
+                    <circle cx="364" cy="198" r="10" fill="var(--park)" stroke="#fff" stroke-width="3.5"/>
+                    <text x="34" y="52" font-size="12" font-weight="700" fill="var(--s-fg)">Rail commuter car park</text>
+                    <text x="34" y="66" font-size="10.5" fill="var(--s-faint)">top of the hill · metered</text>
+                    <text x="204" y="126" font-size="12" font-weight="700" fill="var(--s-fg)">Cemetery entrance</text>
+                    <text x="204" y="140" font-size="10.5" fill="var(--s-faint)">halfway down — us</text>
+                    <text x="352" y="222" font-size="12" font-weight="700" fill="var(--s-fg)" text-anchor="end">Lane Cove National Park</text>
+                    <text x="112" y="108" font-size="10" font-weight="700" fill="var(--diagram)" text-anchor="middle">wide, sealed</text>
+                    <text x="266" y="164" font-size="10" font-weight="700" fill="var(--diagram)" text-anchor="middle">narrow · no footpath</text>
+                  </svg>
                 </figure>
               </div>
             </div>
@@ -117,26 +126,24 @@
             </div>
             <div class="slide-body">
               <h2 class="slide-title">Past our entrance, the road falls apart</h2>
-              <ul class="slide-points lg">
-                <li>No footpath and poor drainage on the lower stretch.</li>
-                <li>Too narrow for two fire trucks to pass — a bushfire evacuation risk.</li>
-                <li>Stormwater running off that stretch pollutes the Park below.</li>
-              </ul>
-              <p class="slide-note">Fixing all of it costs $2 million.</p>
-            </div>
-          </article>
-
-          <article class="slide">
-            <div class="slide-head">
-              <span class="slide-kicker">The sticking point</span>
-              <span class="slide-time">~15s</span>
-            </div>
-            <div class="slide-body">
-              <h2 class="slide-title">And nobody agrees whose run-off it is</h2>
-              <p class="slide-lede">The Park says Cemetery run-off is a big part of the pollution. We don't agree — and either way, we don't think we should carry that cost alone.</p>
-              <div class="slide-card diagram">
-                <p style="margin:0;">That single disputed fact sits underneath the whole negotiation: agree the cause and the split follows, argue the cause and every dollar is contestable.</p>
+              <div class="slide-iconcards">
+                <div class="slide-iconcard">
+                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13" cy="4.2" r="1.8"/><path d="M12.4 21.5 13 15l-2.5-2.4.8-4.1 3.1 1.4 1.9 2.6 2.2.8"/><path d="M10.6 8.5 8 10.2l-.9 3"/><path d="M13 15l-3.4 2.1L7 21.5"/></svg></span>
+                  <h3>No footpath</h3>
+                  <p>Walkers heading to the Park use the road itself, alongside traffic.</p>
+                </div>
+                <div class="slide-iconcard">
+                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c0 3-4 4-4 8a4 4 0 0 0 8 0c0-2-1-3-1-3s3 1 3 5a6 6 0 0 1-12 0c0-6 6-6 6-10z"/></svg></span>
+                  <h3>Bushfire risk</h3>
+                  <p>Too narrow for two fire trucks to pass — an evacuation risk the Park has raised for years.</p>
+                </div>
+                <div class="slide-iconcard">
+                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.7 6.8 9.6a6.5 6.5 0 1 0 10.4 0z"/><path d="M9.4 14.5a2.8 2.8 0 0 0 2.6 2"/></svg></span>
+                  <h3>Stormwater</h3>
+                  <p>Run-off carries weeds, sediment and pollutants down into the Park.</p>
+                </div>
               </div>
+              <p class="slide-note">Fixing all of it costs $2 million.</p>
             </div>
           </article>
 
@@ -147,41 +154,61 @@
             </div>
             <div class="slide-body">
               <h2 class="slide-title">What the fix costs</h2>
-              <div class="slide-tablewrap">
-                <table class="slide-table">
-                  <thead><tr><th>Item</th><th>Cost</th><th>Primarily benefits</th></tr></thead>
-                  <tbody>
-                    <tr><td>Road widening, resurfacing, new footpath</td><td class="mono">$1.2M</td><td>Bushfire evacuation, pedestrian safety — mainly National Park &amp; public</td></tr>
-                    <tr><td>Parking meters (lower section)</td><td class="mono">$0.3M</td><td>Regulated commuter parking — mainly Council revenue &amp; amenity</td></tr>
-                    <tr><td>Stormwater improvements</td><td class="mono">$0.5M</td><td>Park ecology — disputed source of pollution</td></tr>
-                    <tr class="total"><td><strong>Total</strong></td><td class="mono">$2.0M</td><td></td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="slide-bar" role="img" aria-label="Cost split: road widening $1.2M, stormwater $0.5M, parking meters $0.3M.">
-                <span class="b1" style="flex:0 0 60%;">$1.2M</span>
-                <span class="b2" style="flex:0 0 25%;">$0.5M</span>
-                <span class="b3" style="flex:0 0 15%;">$0.3M</span>
-              </div>
-              <div class="slide-barkey">
-                <span><i class="k1"></i> Road &amp; footpath</span>
-                <span><i class="k2"></i> Stormwater</span>
-                <span><i class="k3"></i> Parking meters</span>
+              <div class="slide-donut">
+                <svg viewBox="0 0 120 120" role="img" aria-label="Donut chart of the $2 million budget: road widening and footpath $1.2M (60%), stormwater improvements $0.5M (25%), parking meters $0.3M (15%).">
+                  <circle cx="60" cy="60" r="44" fill="none" stroke="var(--s-soft)" stroke-width="16"/>
+                  <path class="donut-seg" style="--len:165.9;" d="M 60 16 A 44 44 0 1 1 34.14 95.60" fill="none" stroke="var(--diagram)" stroke-width="16" stroke-linecap="butt" stroke-dasharray="165.9 400" stroke-dashoffset="0"/>
+                  <path class="donut-seg" style="--len:69.1;" d="M 34.14 95.60 A 44 44 0 0 1 24.40 34.14" fill="none" stroke="var(--diagram-mid)" stroke-width="16" stroke-linecap="butt" stroke-dasharray="69.1 400" stroke-dashoffset="0"/>
+                  <path class="donut-seg" style="--len:41.5;" d="M 24.40 34.14 A 44 44 0 0 1 60 16" fill="none" stroke="#a9bcd6" stroke-width="16" stroke-linecap="butt" stroke-dasharray="41.5 400" stroke-dashoffset="0"/>
+                  <text class="d-hole" x="60" y="58" font-size="17" text-anchor="middle">$2.0M</text>
+                  <text class="d-sub" x="60" y="72" font-size="8" letter-spacing="1.2" text-anchor="middle">TOTAL</text>
+                </svg>
+                <div class="slide-legend">
+                  <div class="lg-row">
+                    <i style="background:var(--diagram);"></i>
+                    <span class="lg-t">Road widening, resurfacing, footpath <small>Bushfire evacuation and pedestrian safety — mainly the Park and the public</small></span>
+                    <span class="lg-v">$1.2M</span>
+                  </div>
+                  <div class="lg-row">
+                    <i style="background:var(--diagram-mid);"></i>
+                    <span class="lg-t">Stormwater improvements <small>Park ecology — and the disputed one</small></span>
+                    <span class="lg-v">$0.5M</span>
+                  </div>
+                  <div class="lg-row">
+                    <i style="background:#a9bcd6;"></i>
+                    <span class="lg-t">Parking meters, lower section <small>Regulated commuter parking — Council revenue and amenity</small></span>
+                    <span class="lg-v">$0.3M</span>
+                  </div>
+                </div>
               </div>
             </div>
           </article>
 
-          <article class="slide">
+          <article class="slide invert">
             <div class="slide-head">
               <span class="slide-kicker">The negotiation task</span>
-              <span class="slide-time">~15s</span>
+              <span class="slide-time">~20s</span>
             </div>
             <div class="slide-body">
-              <h2 class="slide-title">Agree a joint fix — and how to share it</h2>
-              <p class="slide-lede">The three parties have to agree a long-term fix and how to share its costs and benefits across the bushfire risk, the parking and the stormwater.</p>
-              <div class="slide-card diagram">
-                <p style="margin:0;"><strong>No party benefits equally from all three</strong> — which is exactly what makes the split contestable, and what the next four pages are about.</p>
+              <h2 class="slide-title">Agree a joint fix — and <span class="hl">how to share it</span></h2>
+              <div class="slide-flow">
+                <div class="slide-flowstep">
+                  <span class="fs-n">Problem 01</span>
+                  <h3>Bushfire risk</h3>
+                  <p>Widen the narrow section so two fire trucks can pass.</p>
+                </div>
+                <div class="slide-flowstep">
+                  <span class="fs-n">Problem 02</span>
+                  <h3>Unregulated parking</h3>
+                  <p>Control the commuter parking that makes it worse.</p>
+                </div>
+                <div class="slide-flowstep">
+                  <span class="fs-n">Problem 03</span>
+                  <h3>Stormwater pollution</h3>
+                  <p>Stop the run-off damaging the Park's ecology.</p>
+                </div>
               </div>
+              <p class="slide-lede">No party benefits equally from all three — and nobody agrees whose run-off it is. Agree the cause and the split follows; argue the cause and every dollar is contestable.</p>
             </div>
           </article>
 
@@ -191,83 +218,35 @@
       </div>
       <div class="deck-foot">
         <div class="deck-dots" role="tablist" aria-label="Slides"></div>
-        <p class="deck-count"><b data-deck-cur>1</b> / <span data-deck-total>6</span></p>
+        <p class="deck-count"><b data-deck-cur>1</b> / <span data-deck-total>5</span></p>
         <span class="deck-hint">arrows, swipe or click</span>
       </div>
     </div>
   </div>
 </section>
 
-<div class="group-divider">Supporting detail — reference only</div>
+<div class="group-divider">Appendix — if the room asks</div>
 
 <section class="tight sec-ref">
   <div class="wrap">
     <div class="section-head">
-      <div class="flow-row">
-        <span class="kicker">Where this actually is</span>
-        <span class="flow-tag ref">Supporting detail</span>
-      </div>
+      <span class="kicker">Where this actually is</span>
       <h2>The road, in the real world</h2>
-      <p class="section-sub">Our own identification of the location described in the brief, to ground the case — not a fact stated in the assignment documents themselves.</p>
+      <p class="section-sub">Our own identification of the location described in the brief — not a fact stated in the assignment documents.</p>
     </div>
     <figure class="hero-media">
       <img src="assets/lane-cove-map.jpg" alt="Map of North Ryde showing Delhi Road running from North Ryde station, past the Northern Suburbs Memorial Gardens and Crematorium, to the Lady Game Drive entrance of Lane Cove National Park.">
-      <figcaption>The road itself: Delhi Road becomes Lady Game Drive past the Cemetery, running from North Ryde station down into Lane Cove National Park. <span class="small">(Google Maps)</span></figcaption>
+      <figcaption>Delhi Road becomes Lady Game Drive past the Cemetery, running from North Ryde station down into Lane Cove National Park. <span class="small">(Google Maps)</span></figcaption>
     </figure>
-  </div>
-</section>
-
-<section class="sec-ref">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="flow-row">
-        <span class="kicker">Who's at the table</span>
-        <span class="flow-tag ref">Supporting detail</span>
-      </div>
-      <h2>Each party, in more detail</h2>
-    </div>
-    <div class="grid cols-3">
-      <div class="card">
-        <span class="party us" style="margin-bottom:12px;">Cemetery Owners</span>
-        <p>Privately run cemetery, entrance halfway down the hill. Our position is on the <a href="preparation.html" style="color:var(--accent);">Preparation</a> page.</p>
-      </div>
-      <div class="card">
-        <span class="party council" style="margin-bottom:12px;">Council</span>
-        <p>City of Ryde — owns the road and is the local consent authority. It has metered the upper section and would fund or approve most of the public works.</p>
-      </div>
-      <div class="card">
-        <span class="party park" style="margin-bottom:12px;">National Park</span>
-        <p>Manages Lane Cove National Park under the National Parks and Wildlife Act 1974 (NSW). Wants the narrow section widened for bushfire evacuation, the parking controlled and the stormwater pollution stopped.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="tight sec-ref">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="flow-row">
-        <span class="kicker">The scenario</span>
-        <span class="flow-tag ref">Supporting detail</span>
-      </div>
-      <h2>The full scenario, as briefed</h2>
-    </div>
-    <p>A council-owned road runs about two-thirds of a kilometre downhill, from its junction with a main RMS road to the Lane Cove National Park entrance. A heavy rail station (Epping–Chatswood line) sits at the top on the main road, so commuters now park along the upper section. Council has metered that stretch.</p>
-    <p>Halfway down, on the left, is the public entrance to a large privately run Cemetery. The road is wide and well-maintained to that point, then narrows and deteriorates — ruts, puddles, poor drainage, no footpath. Walkers to and from the Park have to use the road itself. Some commuters park past the Cemetery, but it's unregulated and "higgledy-piggledy."</p>
-    <p>For years the Park has warned that the narrow section is too tight for two fire trucks to pass — a real risk to the Park, its campsite and visitors trying to evacuate (as happened here in the early 1990s). Commuter parking makes it worse. Stormwater run-off from the Cemetery also carries weeds, sediment and pollutants into the Park, damaging its ecology.</p>
-    <p>The Park wants to widen the road, control the parking and fix the stormwater — but it needs both the Cemetery and Council on board to do it.</p>
   </div>
 </section>
 
 <section class="tight sec-ref" id="documents">
   <div class="wrap">
     <div class="section-head">
-      <div class="flow-row">
-        <span class="kicker">Before we started</span>
-        <span class="flow-tag ref">Supporting detail</span>
-      </div>
+      <span class="kicker">Before we started</span>
       <h2>Source documents</h2>
-      <p class="section-sub">The two documents behind everything above, in full — worth having open if the room asks a detail question, not something we read out line by line.</p>
+      <p class="section-sub">The two documents behind everything above, in full.</p>
     </div>
     <div class="doc-list">
       <details class="doc">
@@ -316,21 +295,24 @@
   </div>
 </section>
 
-<section class="tight sec-ref">
+<section class="tight sec-ref" id="sources">
   <div class="wrap">
     <div class="section-head">
-      <div class="flow-row">
-        <span class="kicker">References</span>
-        <span class="flow-tag ref">Supporting detail</span>
-      </div>
+      <span class="kicker">References</span>
       <h2>Sources</h2>
+      <p class="section-sub">One list for the whole site.</p>
     </div>
     <ul class="ref-list">
       <li><em>Environmental Planning and Assessment Act 1979</em> (NSW).</li>
+      <li>Fisher, R., Ury, W., &amp; Patton, B. (2011). <em>Getting to yes: Negotiating agreement without giving in</em> (3rd ed.). Penguin Books.</li>
       <li><em>Local Government Act 1993</em> (NSW).</li>
       <li><em>National Parks and Wildlife Act 1974</em> (NSW).</li>
+      <li>NSW Rural Fire Service. (n.d.). <em>Static water supply (SWS)</em>. Retrieved July 25, 2026, from https://www.rfs.nsw.gov.au/plan-and-prepare/static-water-supply-sws2</li>
+      <li>Planning Institute of Australia. (2023). <em>Code of professional conduct</em> (Version 5.1). Planning Institute of Australia.</li>
       <li><em>Protection of the Environment Operations Act 1997</em> (NSW).</li>
       <li><em>Rural Fires Act 1997</em> (NSW).</li>
+      <li>Upper Parramatta River Catchment Trust. (2005). <em>On-site stormwater detention handbook</em> (4th ed.). Upper Parramatta River Catchment Trust.</li>
+      <li>Ury, W. (1991). <em>Getting past no: Negotiating with difficult people</em>. Bantam Books.</li>
     </ul>
     <p class="ref-note">Referencing follows APA 7th edition.</p>
   </div>
